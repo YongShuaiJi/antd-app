@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Typography, Select, Space, Button } from 'antd';
 import store from '../redux/store'
+import {IAction, DAction} from '../redux/count_action'
 
 
 const {Title} = Typography;
@@ -20,26 +21,26 @@ export default class index extends Component {
 
     increment = ()=>{
         const value = this.selectNumber
-        store.dispatch({type: 'increment', data: Number(value)})
+        store.dispatch(IAction(Number(value)))
     }
     
     decrement = () => {
         const value = this.selectNumber
-        store.dispatch({type: 'decrement', data: Number(value)})
+        store.dispatch(DAction(Number(value)))
         
     }
     incrementIfOdd = () => {
         const value = this.selectNumber
         const count = store.getState();
         if(count%2 !== 0){
-            store.dispatch({type: 'increment', data: Number(value)})
+            store.dispatch(IAction(Number(value)))
         }
     }
     
     incrementAsync = () => {
         const value = this.selectNumber
         setTimeout(()=>{
-            store.dispatch({type: 'increment', data: Number(value)})
+            store.dispatch(IAction(Number(value)))
         }, 500)
     }
 
