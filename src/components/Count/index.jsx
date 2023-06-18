@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
 import { Typography, Select, Space, Button } from 'antd';
-import store from '../redux/store'
-import {IAction, DAction, WaitIAction} from '../redux/count_action'
-
 
 const {Title} = Typography;
-
 
 export default class index extends Component {
     state = {
@@ -14,36 +10,29 @@ export default class index extends Component {
 
     componentDidMount(){
         this.selectNumber = this.state.defaultNumber
-        store.subscribe(()=>{
-            this.setState({})
-        })
     }
 
     increment = ()=>{
         const value = this.selectNumber
-        store.dispatch(IAction(Number(value)))
+        this.props.increment(Number(value))
     }
     
     decrement = () => {
         const value = this.selectNumber
-        store.dispatch(DAction(Number(value)))
+        this.props.decrement(Number(value))
         
     }
     incrementIfOdd = () => {
         const value = this.selectNumber
-        const count = store.getState();
+        const count = this.props.count;
         if(count%2 !== 0){
-            store.dispatch(IAction(Number(value)))
+            this.props.increment(Number(value))
         }
     }
     
     incrementAsync = () => {
         const value = this.selectNumber
-        // setTimeout(()=>{
-        //     store.dispatch(IAction(Number(value)))
-        // }, 500)
-        store.dispatch(WaitIAction(Number(value), 200))
-        // WaitIAction(Number(value), 200)
+        this.props.incrementAsync(Number(value),200)
     }
 
     handleChange = (value) => {
@@ -51,10 +40,9 @@ export default class index extends Component {
     };
 
     render() {
-        // console.log('i=',this.state.defaultNumber)
         return (
             <div>
-                <Title level={2}>当前求和为：{store.getState()}</Title>
+                <Title level={2}>当前求和为：{this.props.count}</Title>
                 <Space wrap>
                     <Select
                     defaultValue= {this.state.defaultNumber}
