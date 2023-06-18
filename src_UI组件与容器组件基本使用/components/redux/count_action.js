@@ -1,5 +1,5 @@
 import {INCREMENT, DECREMENT} from './constant'
-import store from './store'
+import store from '../redux/store'
 // function createIAction(data){
 //     return {type: 'increment', data}
 // }
