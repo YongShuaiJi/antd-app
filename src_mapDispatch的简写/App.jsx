@@ -4,7 +4,7 @@ import { Button, Space ,Card, Upload, Popconfirm } from 'antd'
 import { UploadOutlined, AlipayCircleOutlined } from '@ant-design/icons';
 import './App.css';
 import Count from './containers/Count'
-
+import store from './components/redux/store';
 
 
 export default class App extends Component {
@@ -45,7 +45,7 @@ export default class App extends Component {
           </Space>
           </Card>
           <Card title='求和计算' size='small'>
-            <Count/>
+            <Count store={store} />
           </Card>
         </Space>
 
