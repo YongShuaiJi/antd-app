@@ -3,12 +3,12 @@ import {connect} from 'react-redux'
 import {IAction, DAction, WaitIAction} from '../../components/redux/count_action'
 
 // get 属性
-function mapStateToProps(state){
+const mapStateToProps = (state) =>{
     return {count: state}
 }
 
 // set 属性
-function mapDispatchToProps(dispatch){
+const mapDispatchToProps = (dispatch) =>{
     return{
         increment: (number)=>{
             dispatch(IAction(number))
@@ -22,4 +22,15 @@ function mapDispatchToProps(dispatch){
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CountUI)
+// export default connect(mapStateToProps, mapDispatchToProps)(CountUI)
+
+// 来自框架API 提供的简写方式
+export default connect(
+    state => ({count: state}),
+    {
+        increment: IAction,
+        decrement: DAction,
+        incrementAsync: WaitIAction
+    }
+)(CountUI)
+
